@@ -14,4 +14,16 @@ define command {
     command_line    /usr/bin/printf "<html><body>%b" "State: $SERVICESTATE$<br><table><tr><td>Host:</td><td> <b>$SERVICEDESC$</b></td></tr><tr><td> Gateway:</td><td> $HOSTALIAS$</td></tr></b> <tr><td>\n\nDate/Time:</td><td> $LONGDATETIME$</td></tr><tr><td>Info:</td><td> $SERVICEOUTPUT$</td></tr><tr><td>Tech Notes:</td><td style='color:blue\;font-weight: bold\;'>$NOTIFICATIONCOMMENT$</td></tr></table><div style='color:white'>$NOTIFICATIONTYPE$</div></body></html>" | /bin/sed 's/State: OK/<b style=color:green\;background-color:white>\&nbsp\; \&#x2705\; <\/b>/g' | /bin/sed 's/State: CRITICAL/\&nbsp\;<b style=color:red\;background-color:white> \&#x2622\; <\/b>/g' |/bin/sed 's/State: WARNING/<b style=color:green\;background-color:white>\&nbsp\; \&#x26A0\; <\/b>/g' | /usr/bin/sendemail -f "user@domain.xyz" -u "$SERVICEDESC$ [$SERVICESTATE$]"  -t $CONTACTEMAIL$  -s "smtp.office365.com:587" -xu "user@domain.xyz"     -xp "password" -o tls=yes
 }
 
+define command {
+
+    command_name    check_vbh_dhcp_forti_use
+    command_line    $USER1$/chk_forti_dhcp_use $ARG1
+}
+
+define command {
+
+    command_name    chk_beyondtrust_liscense
+    command_line    $USER1$/chk_beyondtrust_liscense.py $ARG1
+}
+
 ```
