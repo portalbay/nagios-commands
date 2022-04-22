@@ -16,7 +16,7 @@ define command {
 
 define command {
 
-    command_name    check_vbh_dhcp_forti_use
+    command_name    check_dhcp_forti_use
     command_line    $USER1$/chk_forti_dhcp_use $ARG1
 }
 
